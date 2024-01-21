@@ -14,12 +14,13 @@ from datetime import datetime
 from app import app
 
 from apps import dbconnect as db
+
 layout = html.Div(
     [
         html.Div([
-            dcc.Store(id = 'guestprofile_toload', storage_type = 'memory', data = 0)
+            dcc.Store(id = 'discountprofile_toload', storage_type = 'memory', data = 0)
         ]),
-        html.Div([html.H2('Guest Details', style={'color': '#8A1538','margin-left':'25px'})], style = {'float':'left'}),
+        html.Div([html.H2('Discount Details', style={'color': '#8A1538','margin-left':'25px'})], style = {'float':'left'}),
         html.Br(),
         html.Br(),
         html.Br(),
@@ -27,51 +28,22 @@ layout = html.Div(
             [
                 dbc.CardBody(
                     [
-                        dbc.Alert(id = 'guestprofile_alert', is_open = False),
-                        html.H4("Personal Information", style={'margin-left':'15px'}),
+                        dbc.Alert(id = 'discountprofile_alert', is_open = False),
+                        html.H4("Discount Information", style={'margin-left':'15px'}),
                         html.P("Fields marked with '*' are required.", style={'color': 'red', 'margin-left':'15px'}),
                         dbc.Form(
                             [
                                 dbc.Row(
                                     [
-                                        dbc.Label(html.Div(["Guest Name", html.Span("*", style={'color': 'red'})]), style={'margin-left':'15px'}, width = 2),
-                                        dbc.Col(dbc.Input(id ='guestprofile_surname', type = 'text', placeholder = 'Last Name'), width = 2),
-                                        dbc.Col(dbc.Input(id ='guestprofile_firstname', type = 'text', placeholder = 'First Name'), width = 2),
-                                        dbc.Col(dbc.Input(id ='guestprofile_middlename', type = 'text', placeholder = 'Middle Name'),width = 2),
+                                        dbc.Label(html.Div(["Discount Type", html.Span("*", style={'color': 'red'})]), style={'margin-left':'15px'}, width = 2),
+                                        dbc.Col(dbc.Input(id ='discountprofile_discounttype', type = 'text', placeholder = 'Enter Discount Type'), style={'text-align':'left'},width = 4)
                                     ],
                                     className = 'mb-3'
                                 ),
                                 dbc.Row(
                                     [
-                                        dbc.Label("Guest Address", style={'margin-left':'15px'}, width = 2),
-                                        dbc.Col(dbc.Textarea(id = 'guestprofile_address', placeholder="Street Address, Municipality/ Barangay, Province/ Charted City, Region, Country"))
-                                    ],
-                                    className="mb-3"
-                                ),
-                                dbc.Row(
-                                    [
-                                        dbc.Label(html.Div(["Mobile No.", html.Span("*", style={'color': 'red'})]), style={'margin-left':'15px'}, width = 2),
-                                        dbc.Col(dbc.Input(id = 'guestprofile_mobile', type ='text', placeholder = '+639XXXXXXXXX'), width = 3),
-                                        dbc.Label(html.Div(["Email", html.Span("*", style={'color': 'red'})]), style={'margin-left':'45px'}, width =2),
-                                        dbc.Col(dbc.Input(id = 'guestprofile_email', type ='email', placeholder = 'user@email.com'), width = 3)
-
-                                    ],
-                                    className = 'mb-3'
-                                ),
-                                dbc.Row(
-                                    [
-                                        dbc.Label("Occupation", style={'margin-left':'15px'}, width = 2),
-                                        dbc.Col(dbc.Input(id = 'guestprofile_occupation', type ='text', placeholder = 'Enter Occupation'))
-                                    ],
-                                    className = 'mb-3'
-                                ),
-                                dbc.Row(
-                                    [
-                                        dbc.Label("Nationality", style={'margin-left':'15px'}, width = 2),
-                                        dbc.Col(dbc.Input(id = 'guestprofile_nationality', type ='text', placeholder = 'Enter Nationality'), width = 3),
-                                        dbc.Label("Passport No.", style={'margin-left':'45px'}, width =2),
-                                        dbc.Col(dbc.Input(id = 'guestprofile_passport', type ='text', placeholder = 'XXYYYYYYY'), width = 3)
-
+                                        dbc.Label(html.Div(["Discount Percentage", html.Span("*", style={'color': 'red'})]),  style={'margin-left':'15px'}, width = 2),
+                                        dbc.Col(dbc.InputGroup([dbc.Input(id ='discountprofile_percentage', type = 'text', placeholder = 'Enter Percentage'), dbc.InputGroupText("%")]),style={'text-align':'left'},width = 4)
                                     ],
                                     className = 'mb-3'
                                 ),
@@ -80,37 +52,37 @@ layout = html.Div(
                                     [
                                         dbc.Row(
                                             [
-                                                dbc.Label("Delete guest?", style={'margin-left':'15px'}, width = 2),
-                                                dbc.Col(dbc.Checklist(id = 'guestprofile_delete', inline = True, switch =True, value = 0, options = [{"label":"Mark as deleted","value":1}]), width = 4)
+                                                dbc.Label("Delete discount?", style={'margin-left':'15px'},width = 2),
+                                                dbc.Col(dbc.Checklist(id = 'discountprofile_delete', inline = True, switch =True, value = 0, options = [{"label":"Mark as deleted","value":1}]), width = 4)
                                             ],
                                             className = 'mb-3'
                                         )
                                     ],
-                                    id = 'guestprofile_deletediv'
+                                    id = 'discountprofile_deletediv'
                                 ),
-                                html.Div(dbc.Button('Save Guest Profile', id = 'guestprofile_save', n_clicks=0, style={'backgroundColor': '#00573F', 'color': 'white'}), className="d-grid gap-2 col-6 mx-auto"),
+                                html.Div(dbc.Button('Save Discount', id = 'discountprofile_save', n_clicks=0, style={'backgroundColor': '#00573F', 'color': 'white', 'borderColor':'#00573F'}), className="d-grid gap-2 col-6 mx-auto"),
                                 dbc.Modal(
                                     [
-                                        dbc.ModalHeader(html.H4("Guest Profile Saved")),
+                                        dbc.ModalHeader(html.H4("Discount Saved")),
                                         dbc.ModalBody(
                                             [
                                                 dbc.Row(
                                                     [
                                                         #update once modal is working
                                                     ],
-                                                    id = 'guestprofile_feedbackmessage',
+                                                    id = 'discountprofile_feedbackmessage',
                                                     style={'margin-left': '1px'}
                                                 )
                                             ]
                                         ),
                                         dbc.ModalFooter(
                                             [
-                                                dbc.Button("Proceed", href = '/guests/guests_home', id = 'guestprofile_btnmodal')
+                                                dbc.Button("Proceed", href = '/discounts/discounts_home', id = 'discountprofile_btnmodal')
                                             ]
                                         )
                                     ],
                                     centered = True,
-                                    id = 'guestprofile_successmodal',
+                                    id = 'discountprofile_successmodal',
                                     backdrop = 'static'
                                 )
                             ]
@@ -119,10 +91,10 @@ layout = html.Div(
                     ]
                 )
             ],
-            style={'background-color':'#ffffff','margin-left':'20px','margin-right':'20px'}
+           style={'background-color':'#ffffff','margin-left':'20px','margin-right':'20px'}
         )
     ],
-    style={
+	style={
         'background-image': 'url("assets/backgroundimage.png")',
         'height': '100vh',
         'width': '100%',
@@ -270,5 +242,3 @@ def discountprofile_loadprofile (timestamp, toload, search):
         return [discounttype, percentage]
     else:
         raise PreventUpdate
-
-
