@@ -25,7 +25,7 @@ layout = html.Div(
             [
                 dbc.Col(
                     [
-                        html.Div([html.H2('Payment Details', style={'color': '#8A1538'})], style={'float': 'left'}),
+                        html.Div([html.H2('Payment Details', style={'color': '#8A1538','margin-left':'25px'})], style={'float': 'left'}),
                         html.Br(),
                         html.Br(),
                         html.Br(),
@@ -124,20 +124,20 @@ layout = html.Div(
                                                     [
                                                         dbc.Col(
                                                             [
-                                                                dbc.Label("Months:"),
-                                                                dbc.Col([],id='paymentsprofile_months'),
+                                                                dbc.Label("Months:", style={'margin-left':'15px'}),
+                                                                dbc.Col([],id='paymentsprofile_months',style={'margin-left':'25px'}),
                                                             ],
                                                         ),
                                                         dbc.Col(
                                                             [
                                                                 dbc.Label("Days:"),
-                                                                dbc.Col([],id='paymentsprofile_days'),
+                                                                dbc.Col([],id='paymentsprofile_days',style={'margin-left':'25px'}),
                                                             ],
                                                         ),
                                                         dbc.Col(
                                                             [
                                                                 dbc.Label("Hours:"),
-                                                                dbc.Col([],id='paymentsprofile_hours'),
+                                                                dbc.Col([],id='paymentsprofile_hours',style={'margin-left':'25px'}),
                                                             ],
                                                         ),
                                                     ],
@@ -147,7 +147,8 @@ layout = html.Div(
                                         )
                                     ],
                                 )
-                            ]
+                            ],
+                            style={'background-color':'#ffffff','margin-left':'10px'}
                         )
                     ],
                     width=6  
@@ -281,14 +282,20 @@ layout = html.Div(
                                         )
                                     ],
                                 )
-                            ]
+                            ],
+                            style={'background-color':'#ffffff','margin-right':'10px'}
                         )
                     ],
                     width=6  
                 ),
             ]
         ),
-    ]
+    ],
+    style={
+        'background-image': 'url("assets/backgroundimage.png")',
+        'height': '100vh',
+        'width': '100%',
+        'margin': '0'}
 )
 
 @app.callback(
