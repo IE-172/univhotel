@@ -64,7 +64,7 @@ layout = html.Div(
                                 dbc.Row(
                                     [
                                         dbc.Label(html.Div(["No. of Occupants", html.Span("*", style={'color': 'red'})]), style={'margin-left':'15px'}, width = 2),
-                                        dbc.Col(dbc.InputGroup([dbc.Input(id = 'bookingprofile_occupants', placeholder="0", type="number"),dbc.InputGroupText("Adult/s")]), style={'text-align':'left'}, width = 3),
+                                        dbc.Col(dbc.InputGroup([dbc.Input(id = 'bookingprofile_occupants', placeholder="0", type="number", min = 1, step = 1),dbc.InputGroupText("Adult/s")]), style={'text-align':'left'}, width = 3),
                                         dbc.Label("Discount Type", style={'margin-left':'15px'}, width =2),
                                         dbc.Col(dcc.Dropdown(id = 'bookingprofile_discount', placeholder = "Select Discount Type"), style={'text-align':'left'},  width = 3)
 

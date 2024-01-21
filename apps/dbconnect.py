@@ -7,7 +7,7 @@ def getdblocation():
         database = 'univhoteldb',
         user = 'postgres',
         port = '5432',
-        password = 'summer'
+        password = 'password'
     )
     return db
 
