@@ -264,7 +264,8 @@ layout = html.Div(
                                                                     [
                                                                         #update once modal is working
                                                                     ],
-                                                                    id = 'paymentsprofile_feedbackmessage'
+                                                                    id = 'paymentsprofile_feedbackmessage',
+                                                                    style={'margin-left': '1px'}
                                                                 )
                                                             ]
                                                         ),
